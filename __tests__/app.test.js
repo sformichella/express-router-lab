@@ -211,6 +211,19 @@ describe('log routes', () => {
   });
 
   it('deletes a log', async() => {
+    const logData = {
+      recipeId: '1',
+      dateOfEvent: '11-26-20',
+      notes: 'Pull the turkey earlier',
+      rating: '8/10'
+    };
 
+    const log = await Log.insert(logData);
+
+    return request(app)
+      .delete(`/api/v1/logs/${log.id}`)
+      .then(res => {
+        expect(res.body).toEqual({ id: expect.any(String), ...logData });
+      });
   });
 });
