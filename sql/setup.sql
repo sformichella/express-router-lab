@@ -4,7 +4,8 @@ DROP TABLE IF EXISTS logs;
 CREATE TABLE recipes (
   id BIGINT GENERATED ALWAYS AS IDENTITY,
   name TEXT NOT NULL,
-  directions TEXT[]
+  directions TEXT[],
+  ingedients JSONB NOT NULL
 );
 
 CREATE TABLE logs (

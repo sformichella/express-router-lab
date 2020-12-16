@@ -11,27 +11,30 @@ describe('recipe-lab routes', () => {
   });
 
   it('creates a recipe', () => {
+    const recipe = {
+      name: 'cookies',
+      directions: [
+        'preheat oven to 375',
+        'mix ingredients',
+        'put dough on cookie sheet',
+        'bake for 10 minutes'
+      ],
+      ingredients: [
+        {
+          name: 'flour',
+          amount: '1',
+          measurement: 'cup'
+        }
+      ]
+    };
+
     return request(app)
       .post('/api/v1/recipes')
-      .send({
-        name: 'cookies',
-        directions: [
-          'preheat oven to 375',
-          'mix ingredients',
-          'put dough on cookie sheet',
-          'bake for 10 minutes'
-        ]
-      })
+      .send(recipe)
       .then(res => {
         expect(res.body).toEqual({
           id: expect.any(String),
-          name: 'cookies',
-          directions: [
-            'preheat oven to 375',
-            'mix ingredients',
-            'put dough on cookie sheet',
-            'bake for 10 minutes'
-          ]
+          ...recipe
         });
       });
   });
