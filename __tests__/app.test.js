@@ -201,7 +201,7 @@ describe('log routes', () => {
     };
 
     const log = await Log.insert(logData);
-
+    
     return request(app)
       .put(`/api/v1/logs/${log.id}`)
       .send(updatedLogData)
