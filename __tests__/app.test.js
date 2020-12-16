@@ -134,7 +134,22 @@ describe('log routes', () => {
   });
 
   it('creates a new log', () => {
+    const logData = {
+      recipeId: '1',
+      dateOfEvent: '11-26-20',
+      notes: 'Pull the turkey earlier',
+      rating: '8/10'
+    };
 
+    return request(app)
+      .post('/api/v1/logs')
+      .send(logData)
+      .then(res => {
+        expect(res.body).toEqual({
+          id: expect.any(String),
+          ...logData
+        });
+      });
   });
 
   it('gets all logs', async() => {
