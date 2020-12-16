@@ -3,6 +3,7 @@ const pool = require('../lib/utils/pool');
 const request = require('supertest');
 const app = require('../lib/app');
 const Recipe = require('../lib/models/recipe');
+const Log = require('../lib/models/log');
 
 describe('recipe-lab routes', () => {
   beforeEach(() => {
@@ -153,7 +154,18 @@ describe('log routes', () => {
   });
 
   it('gets all logs', async() => {
+    const logs = await Promise.all([
+      { recipeId: '1', dateOfEvent: '11-26-20', notes: 'Pull the turkey earlier', rating: '8/10' },
+      { recipeId: '2', dateOfEvent: '01-01-01', notes: 'This was a long time ago', rating: '8/8' }
+    ].map(log => new Log(log)));
 
+    return request(app)
+      .get('/api/v1/logs')
+      .then(res => {
+        logs.forEach(log => {
+          expect(res.body).toContainEqual(log);
+        });
+      });
   });
 
   it('finds a log by id', async() => {
