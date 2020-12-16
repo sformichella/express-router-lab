@@ -169,7 +169,20 @@ describe('log routes', () => {
   });
 
   it('finds a log by id', async() => {
+    const logData = {
+      recipeId: '1',
+      dateOfEvent: '11-26-20',
+      notes: 'Pull the turkey earlier',
+      rating: '8/10'
+    };
 
+    const log = await Log.insert(logData);
+
+    return request(app)
+      .get(`/api/v1/logs/${log.id}`)
+      .then(res => {
+        expect(res.body).toEqual({ id: expect.any(String), ...logData });
+      });
   });
 
   it('updates a log', async() => {
