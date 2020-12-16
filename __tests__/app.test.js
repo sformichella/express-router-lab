@@ -203,7 +203,7 @@ describe('log routes', () => {
     const log = await Log.insert(logData);
 
     return request(app)
-      .put(`/api/v1/log/${log.id}`)
+      .put(`/api/v1/logs/${log.id}`)
       .send(updatedLogData)
       .then(res => {
         expect(res.body).toEqual({ id: expect.any(String), ...updatedLogData });
