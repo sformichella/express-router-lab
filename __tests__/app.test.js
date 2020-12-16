@@ -127,3 +127,29 @@ describe('recipe-lab routes', () => {
       });
   });
 });
+
+describe('log routes', () => {
+  beforeEach(() => {
+    return pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
+  });
+
+  it('creates a new log', () => {
+
+  });
+
+  it('gets all logs', async() => {
+
+  });
+
+  it('finds a log by id', async() => {
+
+  });
+
+  it('updates a log', async() => {
+
+  });
+
+  it('deletes a log', async() => {
+
+  });
+});
