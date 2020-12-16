@@ -108,6 +108,22 @@ describe('recipe-lab routes', () => {
   });
 
   it('deletes a recipe', async() => {
+    const recipeData = {
+      name: 'cookies',
+      directions: [
+        'preheat oven to 375',
+        'mix ingredients',
+        'put dough on cookie sheet',
+        'bake for 10 minutes'
+      ],
+    };
 
+    const recipe = await Recipe.insert(recipeData);
+
+    return request(app)
+      .delete(`/api/v1/recipes/${recipe.id}`)
+      .then(res => {
+        expect(res.body).toEqual({ id: expect.any(String), ...recipeData });
+      });
   });
 });
