@@ -186,7 +186,28 @@ describe('log routes', () => {
   });
 
   it('updates a log', async() => {
+    const logData = {
+      recipeId: '1',
+      dateOfEvent: '11-26-20',
+      notes: 'Pull the turkey earlier',
+      rating: '8/10'
+    };
 
+    const updatedLogData = {
+      recipeId: '1',
+      dateOfEvent: '11-26-20',
+      notes: 'Pull the turkey earlier',
+      rating: '10/10'
+    };
+
+    const log = await Log.insert(logData);
+
+    return request(app)
+      .put(`/api/v1/log/${log.id}`)
+      .send(updatedLogData)
+      .then(res => {
+        expect(res.body).toEqual({ id: expect.any(String), ...updatedLogData });
+      });
   });
 
   it('deletes a log', async() => {
