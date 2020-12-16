@@ -41,9 +41,9 @@ describe('recipe-lab routes', () => {
 
   it('gets all recipes', async() => {
     const recipes = await Promise.all([
-      { name: 'cookies', directions: [] },
-      { name: 'cake', directions: [] },
-      { name: 'pie', directions: [] }
+      { name: 'cookies', directions: [], ingredients: [{ name: 'flour', amount: '1', measurement: 'cup' }] },
+      { name: 'cake', directions: [], ingredients: [{ name: 'flour', amount: '2', measurement: 'cup' }] },
+      { name: 'pie', directions: [], ingredients: [{ name: 'flour', amount: '999', measurement: 'cup' }] }
     ].map(recipe => Recipe.insert(recipe)));
 
     return request(app)
