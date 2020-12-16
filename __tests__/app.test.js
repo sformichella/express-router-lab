@@ -157,7 +157,7 @@ describe('log routes', () => {
     const logs = await Promise.all([
       { recipeId: '1', dateOfEvent: '11-26-20', notes: 'Pull the turkey earlier', rating: '8/10' },
       { recipeId: '2', dateOfEvent: '01-01-01', notes: 'This was a long time ago', rating: '8/8' }
-    ].map(log => new Log(log)));
+    ].map(log => Log.insert(log)));
 
     return request(app)
       .get('/api/v1/logs')
